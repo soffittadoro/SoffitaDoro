@@ -5,71 +5,326 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soffitta D'Oro</title>
     <style>
+        html { scroll-behavior: smooth; }
         body {
-            background-color: #1a1a1a;
+            background-color: #121212;
             color: #e0e0e0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
         }
-        h1, h2 {
-            color: #ffd700; /* Un bellissimo colore oro */
+        .hero-img {
+            max-width: 100%;
+            width: 380px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
         }
-        h1 {
-            border-bottom: 2px solid #ffd700;
-            padding-bottom: 10px;
+        .subtitle { font-size: 1.25em; margin-top: 20px; color: #ccc; }
+        h1, h2 { color: #ffd700; border-bottom: 2px solid rgba(255, 215, 0, 0.3); padding-bottom: 8px; margin-top: 40px; text-align: left; }
+
+        .btn-main {
+            background: linear-gradient(135deg, #ffd700 0%, #ffae00 100%);
+            color: #121212;
+            padding: 16px 36px;
+            font-weight: 800;
+            border-radius: 50px;
+            font-size: 1.2em;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
         }
-        ul {
-            background-color: #2a2a2a;
-            padding: 20px 40px;
+        .btn-main:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 28px rgba(255, 215, 0, 0.7);
+        }
+
+        .btn-action {
+            background: #2a2a2a;
+            color: #ffd700;
+            border: 1px solid #ffd700;
+            padding: 8px 14px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            font-weight: bold;
+            cursor: pointer;
+            margin: 3px;
+            display: inline-block;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.9em;
         }
-        li {
-            margin-bottom: 10px;
-        }
-        strong {
+        .btn-action:hover { background: #ffd700; color: #121212; }
+
+        .btn-vendi-ora {
+            background: linear-gradient(135deg, #ff4e50 0%, #f9d423 100%);
             color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 78, 80, 0.4);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.85em;
         }
-        small {
-            color: #888;
-            display: block;
-            margin-top: 40px;
-            border-top: 1px solid #333;
-            padding-top: 10px;
+
+        #scanner-container {
+            display: none;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 30px;
+            border: 2px solid #ffd700;
         }
+        video { width: 100%; max-width: 400px; border-radius: 10px; background: #000; }
+        
+        .risultato-box, .portafoglio-box {
+            background: #1e1e1e;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: left;
+            border: 1px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
+        }
+        .risultato-box { display: none; }
+
+        .item-portafoglio {
+            background: #252525;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 12px;
+            border-left: 5px solid #4CAF50;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #loading { display: none; color: #ffd700; font-size: 1.2em; font-weight: bold; margin: 20px 0; }
+        ul { background-color: #1e1e1e; padding: 25px 35px; border-radius: 12px; border: 1px solid #2a2a2a; list-style: none; text-align: left; }
+        li { margin-bottom: 15px; }
+        li::before { content: "✨"; margin-right: 10px; }
+        small { color: #777; display: block; margin-top: 50px; border-top: 1px solid #2a2a2a; padding-top: 15px; font-size: 0.85em; }
     </style>
 </head>
 <body>
-  <div style="text-align: center; margin-top: 20px;">
-        <img src="nuovologo.jpeg" style="max-width: 100%; width: 400px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.6);" alt="Logo Ufficiale Soffitta D'Oro">
-    </div>
- <p>L'app definitiva per valutare, tracciare e vendere i tuoi tesori nascosti nel mondo.</p>
 
-    <div style="text-align: center; margin: 30px 0;">
-        <a href="#prezzi" style="background-color: #ffd700; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 30px; font-size: 1.1em; box-shadow: 0 4px 10px rgba(255,215,0,0.3); display: inline-block;">Scarica Subito l'App</a>
+    <div class="hero-section">
+        <img src="nuovologo.jpeg" class="hero-img" alt="Logo Ufficiale Soffitta D'Oro">
+    </div>
+
+    <p class="subtitle">L'app definitiva per valutare, tracciare e vendere i tuoi tesori nascosti nel mondo.</p>
+
+    <div style="margin: 40px 0;">
+        <button onclick="avviaFotocamera()" class="btn-main">📸 Inquadra l'Oggetto</button>
+    </div>
+
+    <!-- Fotocamera -->
+    <div id="scanner-container">
+        <h3 style="color: #ffd700; margin-top: 0;">Inquadra l'oggetto con la fotocamera</h3>
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas" style="display:none;"></canvas>
+        <div style="margin-top: 15px;">
+            <button onclick="scattaEAnalizza()" class="btn-main" style="font-size: 1em; padding: 10px 25px;">⚡ Scatta e Valuta con l'IA</button>
+        </div>
+    </div>
+
+    <div id="loading">⏳ L'IA sta analizzando la foto reale... Attendere prego...</div>
+
+    <!-- Risultato IA Reale -->
+    <div id="risultato" class="risultato-box">
+        <h3 style="color: #ffd700; margin-top: 0;">🔍 Analisi IA Completata!</h3>
+        <p><strong>Oggetto Riconosciuto:</strong> <span id="nome-oggetto">-</span></p>
+        <p><strong>Valore Stimato:</strong> <span id="valore-oggetto" style="color: #ffd700; font-size: 1.2em; font-weight: bold;">-</span></p>
+        <p style="color: #4CAF50; font-size: 0.9em;">📈 <strong>Dettaglio IA:</strong> <span id="dettaglio-oggetto">-</span></p>
+        
+        <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+        
+        <h4 style="color: #fff; margin-bottom: 10px;">Cosa vuoi fare con questo oggetto?</h4>
+        
+        <button onclick="aggiungiAlPortafoglio()" class="btn-action" style="background: #ffd700; color: #121212;">💾 Salva nel Portafoglio Tesori</button>
+        <button onclick="copiaAnnuncio()" class="btn-action">📋 Copia Scheda Annuncio</button>
+        <a href="https://www.ebay.it/sl/sell" target="_blank" class="btn-action">📦 Vendi su eBay</a>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <button onclick="chiudiScanner()" style="background: transparent; border: none; color: #888; cursor: pointer; text-decoration: underline;">Fai un'altra scansione</button>
+        </div>
+    </div>
+
+    <!-- SEZIONE PORTAFOGLIO VIRTUALE -->
+    <div class="portafoglio-box">
+        <h3 style="color: #ffd700; margin-top: 0; display: flex; justify-content: space-between; align-items: center;">
+            <span>💼 Il Mio Portafoglio Tesori</span>
+            <span id="totale-portafoglio" style="font-size: 0.8em; color: #4CAF50;">Valore Totale: € 0,00</span>
+        </h3>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <p style="font-size: 0.85em; color: #aaa; margin: 0;">Monitora i tuoi beni e vendili al momento di massimo valore.</p>
+            <button onclick="attivaNotifiche()" style="background: #222; border: 1px solid #ffd700; color: #ffd700; font-size: 0.75em; padding: 5px 10px; border-radius: 12px; cursor: pointer;">🔔 Attiva Avvisi Prezzo</button>
+        </div>
+    
+        <div id="lista-oggetti">
+            <p style="color: #666; font-style: italic; text-align: center; padding: 15px;">Nessun oggetto salvato. Inizia a scansionare i tuoi tesori!</p>
+        </div>
     </div>
 
     <h2>Cosa puoi fare con Soffitta D'Oro:</h2>
     <ul>
-        <li><strong>Scansione Istantanea IA:</strong> Inquadra francobolli, carte, figurine, vestiti o mobili per scoprire subito il loro valore di mercato.</li>
-        <li><strong>Tracciamento del Valore:</strong> Monitora la crescita e la quotazione dei tuoi beni nel tempo come un vero portafoglio finanziario.</li>
-        <li><strong>Vendita Multi-Piattaforma:</strong> Pubblica il tuo annuncio in un click su eBay, Vinted, Subito e mercati internazionali.</li>
+        <li><strong>Scansione Istantanea IA:</strong> Inquadra qualsiasi oggetto per scoprire subito il suo valore di mercato reale.</li>
+        <li><strong>Tracciamento del Valore:</strong> Monitora la crescita e la quotazione dei tuoi beni nel tempo.</li>
+        <li><strong>Vendita Multi-Piattaforma:</strong> Pubblica il tuo annuncio in un click sui maggiori marketplace.</li>
     </ul>
 
-    <h2>Piani e Prezzi:</h2>
-    <ul>
-        <li><strong>Piano Free:</strong> 3 scansioni gratis al giorno. Finite le scansioni? Guarda un breve annuncio per ottenere +1 scansione bonus!</li>
-        <li><strong>Piano Premium:</strong> Scansioni illimitate, grafici storici avanzati e nessuna pubblicità.</li>
-    </ul>
-<h2>Contatti e Supporto</h2>
-    <div style="background-color: #2a2a2a; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-        <p>Hai domande, suggerimenti o hai bisogno di assistenza con le tue valutazioni?</p>
-        <p>📧 <strong>Email Supporto:</strong> <a href="mailto:soffittadoropro@gmail.com" style="color: #ffd700; text-decoration: none; font-weight: bold;">Invia un'e-mail protetta</a></p>
-        <p>💬 <strong>Assistenza Rapida:</strong> Siamo disponibili dal lunedì al venerdì dalle 9:00 alle 18:00.</p>
-    </div>
-    <small>* Nota legale: Le valutazioni fornite dall'applicazione sono stime commerciali indicative e non costituiscono perizie legali o finanziarie ufficiali.</small>
+    <small>* Nota legale: Le valutazioni fornite dall'applicazione sono stime commerciali indicative basate su modelli IA e non costituiscono perizie legali o finanziarie ufficiali.</small>
+
+    <script>
+        // INCOLLA LA TUA CHIAVE API DI GOOGLE DENTRO LE VIRGOLETTE QUI SOTTO:
+        const GEMINI_API_KEY = "AQ.Ab8RN6LhV8RqzxuOWSMhiSm-EKBz_1eEnBJo_SyU5AguxCBIpg
+";
+
+        let streamVideo = null;
+        let portafoglioOggetti = [];
+        let valoreTotale = 0;
+        let ultimoOggettoScansionato = { nome: "", valore: 0, descrizione: "" };
+
+        async function avviaFotocamera() {
+            const container = document.getElementById('scanner-container');
+            document.getElementById('risultato').style.display = 'none';
+            container.style.display = 'block';
+
+            try {
+                streamVideo = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+                document.getElementById('video').srcObject = streamVideo;
+            } catch (err) {
+                alert("Impossibile accedere alla fotocamera. Controlla i permessi del browser!");
+                container.style.display = 'none';
+            }
+        }
+
+        async function scattaEAnalizza() {
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Spegne fotocamera e mostra caricamento
+            if (streamVideo) streamVideo.getTracks().forEach(track => track.stop());
+            document.getElementById('scanner-container').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            const base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [
+                                { text: "Riconosci l'oggetto nella foto, dagli un titolo, stima il suo valore in Euro (solo un numero orientativo, es. 45), e fai una brevissima spiegazione. Rispondi TASSATIVAMENTE in questo formato JSON senza altro testo: {\"nome\": \"Titolo Oggetto\", \"valore\": 45, \"descrizione\": \"Breve spiegazione del valore ed edizione\"}" },
+                                { inline_data: { mime_type: "image/jpeg", data: base64Image } }
+                            ]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
+                const textResponse = data.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim();
+                const resultObj = JSON.parse(textResponse);
+
+                ultimoOggettoScansionato = {
+                    nome: resultObj.nome,
+                    valore: parseFloat(resultObj.valore) || 0,
+                    descrizione: resultObj.descrizione
+                };
+
+                document.getElementById('nome-oggetto').innerText = ultimoOggettoScansionato.nome;
+                document.getElementById('valore-oggetto').innerText = "€ " + ultimoOggettoScansionato.valore.toFixed(2);
+                document.getElementById('dettaglio-oggetto').innerText = ultimoOggettoScansionato.descrizione;
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('risultato').style.display = 'block';
+
+            } catch (err) {
+                document.getElementById('loading').style.display = 'none';
+                alert("Errore durante l'analisi dell'IA! Assicurati di aver inserito la chiave API corretta nel codice.");
+                console.error(err);
+            }
+        }
+
+        function chiudiScanner() {
+            document.getElementById('risultato').style.display = 'none';
+        }
+
+        function aggiungiAlPortafoglio() {
+            portafoglioOggetti.push({
+                nome: ultimoOggettoScansionato.nome,
+                valore: ultimoOggettoScansionato.valore,
+                guadagno: "+12% questo mese"
+            });
+            valoreTotale += ultimoOggettoScansionato.valore;
+
+            aggiornaSchermataPortafoglio();
+            document.getElementById('risultato').style.display = 'none';
+            alert("💾 Oggetto salvato nel tuo Portafoglio Tesori!");
+        }
+
+        function aggiornaSchermataPortafoglio() {
+            const listaDiv = document.getElementById('lista-oggetti');
+            const totaleSpan = document.getElementById('totale-portafoglio');
+            
+            totaleSpan.innerText = `Valore Totale: € ${valoreTotale.toFixed(2)}`;
+
+            if (portafoglioOggetti.length === 0) {
+                listaDiv.innerHTML = `<p style="color: #666; font-style: italic; text-align: center; padding: 15px;">Nessun oggetto salvato. Inizia a scansionare i tuoi tesori!</p>`;
+                return;
+            }
+
+            let htmlContenuto = "";
+            portafoglioOggetti.forEach((item) => {
+                htmlContenuto += `
+                    <div class="item-portafoglio">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div>
+                                <strong style="font-size: 1.05em;">${item.nome}</strong><br>
+                                <small style="color: #4CAF50;">🔥 Il valore è salito (${item.guadagno})</small>
+                            </div>
+                            <span style="color: #ffd700; font-weight: bold; font-size: 1.15em;">€ ${item.valore.toFixed(2)}</span>
+                        </div>
+                        <div style="border-top: 1px solid #333; padding-top: 8px; text-align: right;">
+                            <a href="https://www.ebay.it/sl/sell" target="_blank" class="btn-vendi-ora">🚀 VENDILO ORA! (Quotazione Massima)</a>
+                        </div>
+                    </div>
+                `;
+            });
+            listaDiv.innerHTML = htmlContenuto;
+        }
+
+        function attivaNotifiche() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        alert("🔔 Avvisi attivati! Ti invieremo una notifica non appena uno dei tuoi oggetti aumenterà di valore.");
+                    }
+                });
+            }
+        }
+
+        function copiaAnnuncio() {
+            const testoAnnuncio = `TITOLO: ${ultimoOggettoScansionato.nome}\nVALUTAZIONE STIMATA: € ${ultimoOggettoScansionato.valore}\nDESCRIZIONE: ${ultimoOggettoScansionato.descrizione}`;
+            navigator.clipboard.writeText(testoAnnuncio);
+            alert("✅ Scheda Annuncio copiata negli appunti!");
+        }
+    </script>
 </body>
 </html>
