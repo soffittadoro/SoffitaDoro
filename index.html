@@ -231,7 +231,7 @@
                     body: JSON.stringify({
                         contents: [{
                             parts: [
-                                { text: "{ text: "Analizza l'immagine e rispondi ESCLUSIVAMENTE con un oggetto JSON valido in questo formato esatto: {\"nome\": \"NOME_OGGETTO\", \"valore\": \"RANGE_O_VALORE_IN_EURO\", \"descrizione\": \"BREVE_DESCRIZIONE\"}. Identifica esattamente cosa c'è nella foto (es. 'Tazza da caffè', 'Telecomando TV', 'Testa di alligatore da collezione'). Non aggiungere altro testo fuori dal JSON." }" },"}" },
+                               { text: "Identifica esattamente cosa c'e' nella foto. Rispondi solo in formato JSON con tre chiavi: nome, valore (in Euro), descrizione. Se e' un oggetto comune non definirlo antiquariato." },
                                 { inline_data: { mime_type: "image/jpeg", data: base64Image } }
                             ]
                         }]
