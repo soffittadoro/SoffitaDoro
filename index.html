@@ -231,7 +231,7 @@
                     body: JSON.stringify({
                         contents: [{
                             parts: [
-                                { text: "Riconosci l'oggetto nella foto, dagli un titolo, stima il suo valore in Euro (solo un numero orientativo, es. 45), e fai una brevissima spiegazione. Rispondi TASSATIVAMENTE in questo formato JSON senza altro testo: {\"nome\": \"Titolo Oggetto\", \"valore\": 45, \"descrizione\": \"Breve spiegazione del valore ed edizione\"}" },
+                                { text: "{ text: "Identifica esattamente cosa c'è nella foto (es. tazza, libro, scarpa) e dallo come nome. Se è un oggetto moderno e comune, valutalo semplicemente come usato normale e NON come pezzo d'antiquariato. Restituisci il risultato nello stesso formato JSON con nome, valore e descrizione." },"}" },
                                 { inline_data: { mime_type: "image/jpeg", data: base64Image } }
                             ]
                         }]
@@ -328,3 +328,4 @@
     </script>
 </body>
 </html>
+
