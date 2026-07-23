@@ -26,6 +26,13 @@
             color: #ffd700;
             margin-bottom: 10px;
         }
+        .banner {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 2px solid #ffd700;
+        }
         .btn-camera {
             background: linear-gradient(135deg, #ffd700, #ffa500);
             color: #000;
@@ -39,11 +46,11 @@
             width: 100%;
             display: block;
             box-sizing: border-box;
+            transition: 0.2s ease;
         }
-        .btn-camera:disabled {
-            background: #555;
-            color: #888;
-            cursor: not-allowed;
+        .btn-camera:hover {
+            filter: brightness(1.15);
+            transform: scale(1.02);
         }
         .btn-secondary {
             background-color: #333;
@@ -55,6 +62,10 @@
             cursor: pointer;
             margin-top: 10px;
             width: 100%;
+            transition: 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #444;
         }
         .btn-affiliate {
             background-color: #0070ba;
@@ -67,6 +78,10 @@
             cursor: pointer;
             margin-top: 8px;
             width: 100%;
+            transition: 0.2s ease;
+        }
+        .btn-affiliate:hover {
+            filter: brightness(1.1);
         }
         .btn-ad {
             background-color: #2e7d32;
@@ -133,6 +148,9 @@
 <body>
 
 <div class="container">
+    <!-- Immagine del Baule / Logo -->
+    <img src="SoffittaDoro.png" class="banner" alt="Soffitta D'Oro Baule" onerror="this.style.display='none'">
+    
     <h1>SOFFITTA D'ORO</h1>
     <p>La guida definitiva per valutare, tracciare e vendere i tuoi tesori nascosti.</p>
 
@@ -141,11 +159,11 @@
         <span class="badge-crediti">⚡ Scansioni gratuite rimaste: <strong id="num-crediti">3</strong></span>
     </div>
 
-    <!-- Pulsante Scansione -->
-    <button id="btn-scatta" class="btn-camera" onclick="avviaScansione()">📸 Inquadra l'Oggetto</button>
+    <!-- Pulsante Fotocamera nativo con Label -->
+    <label for="file-input" class="btn-camera" id="label-scatta">📸 Inquadra l'Oggetto</label>
     <input type="file" id="file-input" accept="image/*" capture="environment">
 
-    <!-- Pulsante per sbloccare guardando una pubblicità -->
+    <!-- Sezione Spot pubblicitario se crediti a zero -->
     <div id="sezione-adv" style="display:none; margin-top:10px;">
         <p style="font-size:13px; color:#ff9800; margin:5px 0;">Hai esaurito le scansioni gratuite!</p>
         <button class="btn-ad" onclick="guardaSpotPubblicita()">▶️ Guarda un breve spot per +1 Scansione</button>
@@ -205,6 +223,7 @@
     aggiornaVistaPortafoglio();
 
     const fileInput = document.getElementById('file-input');
+    const labelScatta = document.getElementById('label-scatta');
     const previewImg = document.getElementById('preview-img');
     const loading = document.getElementById('loading');
     const risultato = document.getElementById('risultato');
@@ -218,14 +237,14 @@
         }
     }
 
-    function avviaScansione() {
+    // Controllo crediti prima di aprire la fotocamera con la label nativa
+    labelScatta.addEventListener('click', function(e) {
         if (crediti <= 0) {
+            e.preventDefault(); // Blocca l'apertura della fotocamera se i crediti sono finiti
             alert("Hai esaurito le scansioni gratuite! Guarda un breve spot per continuare.");
             document.getElementById('sezione-adv').style.display = 'block';
-            return;
         }
-        fileInput.click();
-    }
+    });
 
     function guardaSpotPubblicita() {
         alert("📺 [Simulazione Spot] Goditi il video pubblicitario di 5 secondi...");
@@ -259,7 +278,7 @@
         loading.style.display = 'block';
         risultato.style.display = 'none';
 
-        // ⚠️ INSERISCI LA TUA CHIAVE API NELLA RIGA SOTTOSTANTE (tra le virgolette) ⚠️
+        // ⚠️ INSERISCI QUI LA TUA CHIAVE API TRA LE VIRGOLETTE ⚠️
         const apiKey = "AQ.Ab8RN6LhV8RqzxuOWSMhiSm-EKBz_1eEnBJo_SyU5AguxCBIpg";
 
         const promptText = "Analizza l'immagine e identifica cosa c'e'. Rispondi TASSATIVAMENTE solo con un oggetto JSON in questo formato esatto senza blocchi di codice markdown: {\"nome\": \"NOME_ESATTO\", \"valore\": \"RANGO_VALORE_O_NUMERO\", \"descrizione\": \"CONSIGLI_VENDITA_E_DETTAGLI\"}. Se e' un oggetto moderno o comune NON definirlo di antiquariato.";
@@ -309,7 +328,6 @@
         let url = "";
         
         if (piattaforma === 'ebay') {
-            // Sostituisci "tuo-codice-affiliato" con il tuo ID di eBay Partner Network reale in futuro
             url = `https://www.ebay.it/sch/i.html?_nkw=${query}&mkcid=1&mkrid=724-53478-19255-0&siteid=101&campid=tuo-codice-affiliato`;
         } else if (piattaforma === 'vinted') {
             url = `https://www.vinted.it/catalog?search_text=${query}`;
@@ -373,4 +391,4 @@
 </script>
 
 </body>
-</html>F
+</html>
