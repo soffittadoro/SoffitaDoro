@@ -5,327 +5,372 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soffitta D'Oro</title>
     <style>
-        html { scroll-behavior: smooth; }
         body {
+            font-family: Arial, sans-serif;
             background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
+            color: #ffffff;
+            margin: 0;
+            padding: 15px;
             text-align: center;
         }
-        .hero-img {
-            max-width: 100%;
-            width: 380px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.15);
-        }
-        .subtitle { font-size: 1.25em; margin-top: 20px; color: #ccc; }
-        h1, h2 { color: #ffd700; border-bottom: 2px solid rgba(255, 215, 0, 0.3); padding-bottom: 8px; margin-top: 40px; text-align: left; }
-
-        .btn-main {
-            background: linear-gradient(135deg, #ffd700 0%, #ffae00 100%);
-            color: #121212;
-            padding: 16px 36px;
-            font-weight: 800;
-            border-radius: 50px;
-            font-size: 1.2em;
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-            display: inline-block;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .btn-main:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 28px rgba(255, 215, 0, 0.7);
-        }
-
-        .btn-action {
-            background: #2a2a2a;
-            color: #ffd700;
-            border: 1px solid #ffd700;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 3px;
-            display: inline-block;
-            text-decoration: none;
-            transition: 0.2s;
-            font-size: 0.9em;
-        }
-        .btn-action:hover { background: #ffd700; color: #121212; }
-
-        .btn-vendi-ora {
-            background: linear-gradient(135deg, #ff4e50 0%, #f9d423 100%);
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(255, 78, 80, 0.4);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 8px;
-            font-size: 0.85em;
-        }
-
-        #scanner-container {
-            display: none;
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
             background: #1e1e1e;
             padding: 20px;
-            border-radius: 16px;
-            margin-top: 30px;
-            border: 2px solid #ffd700;
-        }
-        video { width: 100%; max-width: 400px; border-radius: 10px; background: #000; }
-        
-        .risultato-box, .portafoglio-box {
-            background: #1e1e1e;
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 20px;
-            text-align: left;
+            border-radius: 15px;
             border: 1px solid #ffd700;
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.15);
         }
-        .risultato-box { display: none; }
-
-        .item-portafoglio {
-            background: #252525;
+        h1, h2, h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        .btn-camera {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            color: #000;
+            border: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            display: block;
+            box-sizing: border-box;
+        }
+        .btn-camera:disabled {
+            background: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .btn-secondary {
+            background-color: #333;
+            color: #ffd700;
+            border: 1px solid #ffd700;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .btn-affiliate {
+            background-color: #0070ba;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+        }
+        .btn-ad {
+            background-color: #2e7d32;
+            color: #fff;
+            border: none;
+            padding: 12px 15px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+        #file-input { display: none; }
+        #preview-img {
+            max-width: 100%;
+            margin-top: 15px;
+            border-radius: 10px;
+            display: none;
+            border: 2px solid #ffd700;
+        }
+        #loading {
+            display: none;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #ffd700;
+        }
+        .card-box {
+            background: #2a2a2a;
             padding: 15px;
             border-radius: 10px;
-            margin-top: 12px;
-            border-left: 5px solid #4CAF50;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            text-align: left;
+            margin-top: 20px;
+            border: 1px solid #444;
         }
-
-        #loading { display: none; color: #ffd700; font-size: 1.2em; font-weight: bold; margin: 20px 0; }
-        ul { background-color: #1e1e1e; padding: 25px 35px; border-radius: 12px; border: 1px solid #2a2a2a; list-style: none; text-align: left; }
-        li { margin-bottom: 15px; }
-        li::before { content: "✨"; margin-right: 10px; }
-        small { color: #777; display: block; margin-top: 50px; border-top: 1px solid #2a2a2a; padding-top: 15px; font-size: 0.85em; }
+        .vip-box {
+            background: linear-gradient(135deg, #2b2600, #000000);
+            border: 2px solid #ffd700;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 25px;
+        }
+        .legal-box {
+            font-size: 11px;
+            color: #888;
+            margin-top: 25px;
+            text-align: justify;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
+        ul { padding-left: 20px; margin: 5px 0; }
+        .badge-crediti {
+            background: #333;
+            color: #ffd700;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 10px;
+            border: 1px solid #ffd700;
+        }
     </style>
 </head>
 <body>
 
-    <div class="hero-section">
-        <img src="nuovologo.jpeg" class="hero-img" alt="Logo Ufficiale Soffitta D'Oro">
+<div class="container">
+    <h1>SOFFITTA D'ORO</h1>
+    <p>La guida definitiva per valutare, tracciare e vendere i tuoi tesori nascosti.</p>
+
+    <!-- Crediti e Scansioni -->
+    <div>
+        <span class="badge-crediti">⚡ Scansioni gratuite rimaste: <strong id="num-crediti">3</strong></span>
     </div>
 
-    <p class="subtitle">L'app definitiva per valutare, tracciare e vendere i tuoi tesori nascosti nel mondo.</p>
+    <!-- Pulsante Scansione -->
+    <button id="btn-scatta" class="btn-camera" onclick="avviaScansione()">📸 Inquadra l'Oggetto</button>
+    <input type="file" id="file-input" accept="image/*" capture="environment">
 
-    <div style="margin: 40px 0;">
-        <button onclick="avviaFotocamera()" class="btn-main">📸 Inquadra l'Oggetto</button>
+    <!-- Pulsante per sbloccare guardando una pubblicità -->
+    <div id="sezione-adv" style="display:none; margin-top:10px;">
+        <p style="font-size:13px; color:#ff9800; margin:5px 0;">Hai esaurito le scansioni gratuite!</p>
+        <button class="btn-ad" onclick="guardaSpotPubblicita()">▶️ Guarda un breve spot per +1 Scansione</button>
     </div>
 
-    <!-- Fotocamera -->
-    <div id="scanner-container">
-        <h3 style="color: #ffd700; margin-top: 0;">Inquadra l'oggetto con la fotocamera</h3>
-        <video id="video" autoplay playsinline></video>
-        <canvas id="canvas" style="display:none;"></canvas>
-        <div style="margin-top: 15px;">
-            <button onclick="scattaEAnalizza()" class="btn-main" style="font-size: 1em; padding: 10px 25px;">⚡ Scatta e Valuta con l'IA</button>
-        </div>
-    </div>
+    <img id="preview-img" src="" alt="Anteprima Oggetto">
 
-    <div id="loading">⏳ L'IA sta analizzando la foto reale... Attendere prego...</div>
+    <div id="loading">⏳ Analisi dell'oggetto e ricerca valore in corso...</div>
 
-    <!-- Risultato IA Reale -->
-    <div id="risultato" class="risultato-box">
-        <h3 style="color: #ffd700; margin-top: 0;">🔍 Analisi IA Completata!</h3>
-        <p><strong>Oggetto Riconosciuto:</strong> <span id="nome-oggetto">-</span></p>
-        <p><strong>Valore Stimato:</strong> <span id="valore-oggetto" style="color: #ffd700; font-size: 1.2em; font-weight: bold;">-</span></p>
-        <p style="color: #4CAF50; font-size: 0.9em;">📈 <strong>Dettaglio IA:</strong> <span id="dettaglio-oggetto">-</span></p>
+    <!-- Scheda Risultato con Affiliazioni -->
+    <div id="risultato" class="card-box" style="display: none;">
+        <h3>Risultato dell'analisi:</h3>
+        <p><strong>Oggetto rilevato:</strong> <span id="nome-oggetto">-</span></p>
+        <p><strong>Valore stimato:</strong> <span id="valore-oggetto">-</span></p>
+        <p><strong>Consigli:</strong> <span id="dettaglio-oggetto">-</span></p>
         
-        <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+        <button class="btn-secondary" onclick="salvaNelPortafoglio()">💼 Aggiungi al mio Portafoglio</button>
+        <button class="btn-secondary" onclick="copiaAnnuncio()">📋 Copia Scheda Annuncio</button>
         
-        <h4 style="color: #fff; margin-bottom: 10px;">Cosa vuoi fare con questo oggetto?</h4>
-        
-        <button onclick="aggiungiAlPortafoglio()" class="btn-action" style="background: #ffd700; color: #121212;">💾 Salva nel Portafoglio Tesori</button>
-        <button onclick="copiaAnnuncio()" class="btn-action">📋 Copia Scheda Annuncio</button>
-        <a href="https://www.ebay.it/sl/sell" target="_blank" class="btn-action">📦 Vendi su eBay</a>
-
-        <div style="margin-top: 20px; text-align: center;">
-            <button onclick="chiudiScanner()" style="background: transparent; border: none; color: #888; cursor: pointer; text-decoration: underline;">Fai un'altra scansione</button>
-        </div>
+        <hr style="border:0; border-top:1px solid #444; margin:15px 0;">
+        <p style="font-size:12px; color:#bbb; margin-bottom:5px;">Guadagna vendendo questo oggetto (Link Affiliati):</p>
+        <button class="btn-affiliate" onclick="apriAffiliazione('ebay')">🛒 Vendi su eBay (Guadagna Commissione)</button>
+        <button class="btn-affiliate" style="background-color: #00a29a;" onclick="apriAffiliazione('vinted')">👗 Vendi su Vinted (Zero Commissioni)</button>
     </div>
 
-    <!-- SEZIONE PORTAFOGLIO VIRTUALE -->
-    <div class="portafoglio-box">
-        <h3 style="color: #ffd700; margin-top: 0; display: flex; justify-content: space-between; align-items: center;">
-            <span>💼 Il Mio Portafoglio Tesori</span>
-            <span id="totale-portafoglio" style="font-size: 0.8em; color: #4CAF50;">Valore Totale: € 0,00</span>
-        </h3>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <p style="font-size: 0.85em; color: #aaa; margin: 0;">Monitora i tuoi beni e vendili al momento di massimo valore.</p>
-            <button onclick="attivaNotifiche()" style="background: #222; border: 1px solid #ffd700; color: #ffd700; font-size: 0.75em; padding: 5px 10px; border-radius: 12px; cursor: pointer;">🔔 Attiva Avvisi Prezzo</button>
+    <!-- Portafoglio Tesori -->
+    <div class="card-box">
+        <h3>💼 Il Mio Portafoglio Tesori</h3>
+        <p><strong>Valore Totale stimato:</strong> <span id="totale-portafoglio" style="color:#ffd700; font-size:18px; font-weight:bold;">0,00 €</span></p>
+        <div id="lista-portafoglio">
+            <p style="font-size:13px; color:#aaa;">Nessun oggetto ancora salvato nel portafoglio.</p>
         </div>
-    
-        <div id="lista-oggetti">
-            <p style="color: #666; font-style: italic; text-align: center; padding: 15px;">Nessun oggetto salvato. Inizia a scansionare i tuoi tesori!</p>
-        </div>
+        <button class="btn-secondary" onclick="attivaNotifiche()">🔔 Attiva Avvisi Aumento Valore</button>
     </div>
 
-    <h2>Cosa puoi fare con Soffitta D'Oro:</h2>
-    <ul>
-        <li><strong>Scansione Istantanea IA:</strong> Inquadra qualsiasi oggetto per scoprire subito il suo valore di mercato reale.</li>
-        <li><strong>Tracciamento del Valore:</strong> Monitora la crescita e la quotazione dei tuoi beni nel tempo.</li>
-        <li><strong>Vendita Multi-Piattaforma:</strong> Pubblica il tuo annuncio in un click sui maggiori marketplace.</li>
-    </ul>
+    <!-- Box VIP -->
+    <div class="vip-box">
+        <h3 style="margin-top:0;">👑 Passa a Soffitta d'Oro VIP</h3>
+        <p style="font-size:14px;">Scansioni ILLIMITATE, zero pubblicità e avvisi di mercato a soli <strong>4,99€ / mese</strong>.</p>
+        <button class="btn-camera" style="font-size:15px; padding:10px;" onclick="alert('Funzione abbonamento in arrivo!')">Attiva Prova Gratuita</button>
+    </div>
 
-    <small>* Nota legale: Le valutazioni fornite dall'applicazione sono stime commerciali indicative basate su modelli IA e non costituiscono perizie legali o finanziarie ufficiali.</small>
+    <!-- Protezioni Legali e Garanzie -->
+    <div class="legal-box">
+        <strong style="color:#aaa;">⚖️ GARANZIE E PROTEZIONI LEGALI:</strong><br>
+        Le stime fornite dall'IA sono puramente indicative e basate sulle quotazioni medie di mercato online. Non costituiscono una perizia legale o finanziaria vincolante. L'utente è responsabile delle transazioni di vendita effettuate tramite link di affiliazione o piattaforme terze nel rispetto della normativa fiscale vigente.
+    </div>
+</div>
 
-    <script>
-        // INCOLLA LA TUA CHIAVE API DI GOOGLE DENTRO LE VIRGOLETTE QUI SOTTO:
-        const GEMINI_API_KEY = "AQ.Ab8RN6LhV8RqzxuOWSMhiSm-EKBz_1eEnBJo_SyU5AguxCBIpg
-";
+<script>
+    // Gestione Crediti e Scansioni
+    let crediti = localStorage.getItem('soffitta_crediti') !== null ? parseInt(localStorage.getItem('soffitta_crediti')) : 3;
+    aggiornaInterfacciaCrediti();
 
-        let streamVideo = null;
-        let portafoglioOggetti = [];
-        let valoreTotale = 0;
-        let ultimoOggettoScansionato = { nome: "", valore: 0, descrizione: "" };
+    let ultimoOggettoScansionato = null;
+    let portafoglio = JSON.parse(localStorage.getItem('soffitta_portafoglio')) || [];
+    aggiornaVistaPortafoglio();
 
-        async function avviaFotocamera() {
-            const container = document.getElementById('scanner-container');
-            document.getElementById('risultato').style.display = 'none';
-            container.style.display = 'block';
+    const fileInput = document.getElementById('file-input');
+    const previewImg = document.getElementById('preview-img');
+    const loading = document.getElementById('loading');
+    const risultato = document.getElementById('risultato');
 
-            try {
-                streamVideo = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-                document.getElementById('video').srcObject = streamVideo;
-            } catch (err) {
-                alert("Impossibile accedere alla fotocamera. Controlla i permessi del browser!");
-                container.style.display = 'none';
-            }
+    function aggiornaInterfacciaCrediti() {
+        document.getElementById('num-crediti').innerText = crediti;
+        if (crediti <= 0) {
+            document.getElementById('sezione-adv').style.display = 'block';
+        } else {
+            document.getElementById('sezione-adv').style.display = 'none';
         }
+    }
 
-        async function scattaEAnalizza() {
-            const video = document.getElementById('video');
-            const canvas = document.getElementById('canvas');
-            const context = canvas.getContext('2d');
-
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Spegne fotocamera e mostra caricamento
-            if (streamVideo) streamVideo.getTracks().forEach(track => track.stop());
-            document.getElementById('scanner-container').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
-
-            const base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
-
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [
-                               { text: "Identifica esattamente cosa c'e' nella foto. Rispondi solo in formato JSON con tre chiavi: nome, valore (in Euro), descrizione. Se e' un oggetto comune non definirlo antiquariato." },
-                                { inline_data: { mime_type: "image/jpeg", data: base64Image } }
-                            ]
-                        }]
-                    })
-                });
-
-                const data = await response.json();
-                const textResponse = data.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim();
-                const resultObj = JSON.parse(textResponse);
-
-                ultimoOggettoScansionato = {
-                    nome: resultObj.nome,
-                    valore: parseFloat(resultObj.valore) || 0,
-                    descrizione: resultObj.descrizione
-                };
-
-                document.getElementById('nome-oggetto').innerText = ultimoOggettoScansionato.nome;
-                document.getElementById('valore-oggetto').innerText = "€ " + ultimoOggettoScansionato.valore.toFixed(2);
-                document.getElementById('dettaglio-oggetto').innerText = ultimoOggettoScansionato.descrizione;
-
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('risultato').style.display = 'block';
-
-            } catch (err) {
-                document.getElementById('loading').style.display = 'none';
-                alert("Errore durante l'analisi dell'IA! Assicurati di aver inserito la chiave API corretta nel codice.");
-                console.error(err);
-            }
+    function avviaScansione() {
+        if (crediti <= 0) {
+            alert("Hai esaurito le scansioni gratuite! Guarda un breve spot per continuare.");
+            document.getElementById('sezione-adv').style.display = 'block';
+            return;
         }
+        fileInput.click();
+    }
 
-        function chiudiScanner() {
-            document.getElementById('risultato').style.display = 'none';
+    function guardaSpotPubblicita() {
+        alert("📺 [Simulazione Spot] Goditi il video pubblicitario di 5 secondi...");
+        setTimeout(() => {
+            crediti += 1;
+            localStorage.setItem('soffitta_crediti', crediti);
+            aggiornaInterfacciaCrediti();
+            alert("🎉 Ottimo! Hai guadagnato 1 nuova scansione gratuita!");
+        }, 1500);
+    }
+
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            // Scala un credito
+            crediti--;
+            localStorage.setItem('soffitta_crediti', crediti);
+            aggiornaInterfacciaCrediti();
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                previewImg.style.display = 'block';
+                scattaEAnalizza(e.target.result.split(',')[1]);
+            };
+            reader.readAsDataURL(file);
         }
+    });
 
-        function aggiungiAlPortafoglio() {
-            portafoglioOggetti.push({
-                nome: ultimoOggettoScansionato.nome,
-                valore: ultimoOggettoScansionato.valore,
-                guadagno: "+12% questo mese"
+    async function scattaEAnalizza(base64Image) {
+        loading.style.display = 'block';
+        risultato.style.display = 'none';
+
+        // ⚠️ INSERISCI LA TUA CHIAVE API NELLA RIGA SOTTOSTANTE (tra le virgolette) ⚠️
+        const apiKey = "AQ.Ab8RN6LhV8RqzxuOWSMhiSm-EKBz_1eEnBJo_SyU5AguxCBIpg";
+
+        const promptText = "Analizza l'immagine e identifica cosa c'e'. Rispondi TASSATIVAMENTE solo con un oggetto JSON in questo formato esatto senza blocchi di codice markdown: {\"nome\": \"NOME_ESATTO\", \"valore\": \"RANGO_VALORE_O_NUMERO\", \"descrizione\": \"CONSIGLI_VENDITA_E_DETTAGLI\"}. Se e' un oggetto moderno o comune NON definirlo di antiquariato.";
+
+        try {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [
+                            { text: promptText },
+                            { inline_data: { mime_type: "image/jpeg", data: base64Image } }
+                        ]
+                    }]
+                })
             });
-            valoreTotale += ultimoOggettoScansionato.valore;
 
-            aggiornaSchermataPortafoglio();
-            document.getElementById('risultato').style.display = 'none';
-            alert("💾 Oggetto salvato nel tuo Portafoglio Tesori!");
+            const data = await response.json();
+            const textResponse = data.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim();
+            const resultObj = JSON.parse(textResponse);
+
+            ultimoOggettoScansionato = {
+                nome: resultObj.nome || "Oggetto sconosciuto",
+                valore: resultObj.valore || "Da valutare",
+                descrizione: resultObj.descrizione || "Nessun dettaglio.",
+                data: new Date().toLocaleDateString('it-IT')
+            };
+
+            document.getElementById('nome-oggetto').innerText = ultimoOggettoScansionato.nome;
+            document.getElementById('valore-oggetto').innerText = ultimoOggettoScansionato.valore + " €";
+            document.getElementById('dettaglio-oggetto').innerText = ultimoOggettoScansionato.descrizione;
+
+            loading.style.display = 'none';
+            risultato.style.display = 'block';
+
+        } catch (err) {
+            loading.style.display = 'none';
+            alert("Errore durante l'analisi dell'IA. Verifica la tua API Key.");
+            console.error(err);
+        }
+    }
+
+    function apriAffiliazione(piattaforma) {
+        if (!ultimoOggettoScansionato) return;
+        let query = encodeURIComponent(ultimoOggettoScansionato.nome);
+        let url = "";
+        
+        if (piattaforma === 'ebay') {
+            // Sostituisci "tuo-codice-affiliato" con il tuo ID di eBay Partner Network reale in futuro
+            url = `https://www.ebay.it/sch/i.html?_nkw=${query}&mkcid=1&mkrid=724-53478-19255-0&siteid=101&campid=tuo-codice-affiliato`;
+        } else if (piattaforma === 'vinted') {
+            url = `https://www.vinted.it/catalog?search_text=${query}`;
+        }
+        
+        window.open(url, '_blank');
+    }
+
+    function salvaNelPortafoglio() {
+        if (!ultimoOggettoScansionato) return;
+        portafoglio.push(ultimoOggettoScansionato);
+        localStorage.setItem('soffitta_portafoglio', JSON.stringify(portafoglio));
+        aggiornaVistaPortafoglio();
+        alert("🎉 Oggetto salvato nel tuo portafoglio!");
+    }
+
+    function aggiornaVistaPortafoglio() {
+        const container = document.getElementById('lista-portafoglio');
+        const totaleEl = document.getElementById('totale-portafoglio');
+        
+        if (portafoglio.length === 0) {
+            container.innerHTML = `<p style="font-size:13px; color:#aaa;">Nessun oggetto ancora salvato nel portafoglio.</p>`;
+            totaleEl.innerText = "0,00 €";
+            return;
         }
 
-        function aggiornaSchermataPortafoglio() {
-            const listaDiv = document.getElementById('lista-oggetti');
-            const totaleSpan = document.getElementById('totale-portafoglio');
-            
-            totaleSpan.innerText = `Valore Totale: € ${valoreTotale.toFixed(2)}`;
+        let html = '<ul style="text-align:left; font-size:14px;">';
+        let totale = 0;
 
-            if (portafoglioOggetti.length === 0) {
-                listaDiv.innerHTML = `<p style="color: #666; font-style: italic; text-align: center; padding: 15px;">Nessun oggetto salvato. Inizia a scansionare i tuoi tesori!</p>`;
-                return;
-            }
+        portafoglio.forEach((item) => {
+            html += `<li><strong>${item.nome}</strong>: ${item.valore} € <span style="font-size:10px; color:#888;">(${item.data})</span></li>`;
+            let valNum = parseFloat(item.valore.toString().replace(',', '.').match(/\d+(\.\d+)?/));
+            if (!isNaN(valNum)) totale += valNum;
+        });
 
-            let htmlContenuto = "";
-            portafoglioOggetti.forEach((item) => {
-                htmlContenuto += `
-                    <div class="item-portafoglio">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                            <div>
-                                <strong style="font-size: 1.05em;">${item.nome}</strong><br>
-                                <small style="color: #4CAF50;">🔥 Il valore è salito (${item.guadagno})</small>
-                            </div>
-                            <span style="color: #ffd700; font-weight: bold; font-size: 1.15em;">€ ${item.valore.toFixed(2)}</span>
-                        </div>
-                        <div style="border-top: 1px solid #333; padding-top: 8px; text-align: right;">
-                            <a href="https://www.ebay.it/sl/sell" target="_blank" class="btn-vendi-ora">🚀 VENDILO ORA! (Quotazione Massima)</a>
-                        </div>
-                    </div>
-                `;
+        html += '</ul>';
+        container.innerHTML = html;
+        totaleEl.innerText = totale.toFixed(2) + " €";
+    }
+
+    function copiaAnnuncio() {
+        if (!ultimoOggettoScansionato) return;
+        const testo = `TITOLO: ${ultimoOggettoScansionato.nome}\nVALORE STIMATO: ${ultimoOggettoScansionato.valore} €\nNOTE: ${ultimoOggettoScansionato.descrizione}`;
+        navigator.clipboard.writeText(testo);
+        alert("📋 Scheda annuncio copiata negli appunti!");
+    }
+
+    function attivaNotifiche() {
+        if ('Notification' in window) {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    alert("🔔 Avvisi attivi! Ti notificheremo quando i trend del portafoglio saliranno.");
+                } else {
+                    alert("⚠️ Permesso notifiche non concesso.");
+                }
             });
-            listaDiv.innerHTML = htmlContenuto;
+        } else {
+            alert("Notifiche non supportate dal browser.");
         }
+    }
+</script>
 
-        function attivaNotifiche() {
-            if ("Notification" in window) {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        alert("🔔 Avvisi attivati! Ti invieremo una notifica non appena uno dei tuoi oggetti aumenterà di valore.");
-                    }
-                });
-            }
-        }
-
-        function copiaAnnuncio() {
-            const testoAnnuncio = `TITOLO: ${ultimoOggettoScansionato.nome}\nVALUTAZIONE STIMATA: € ${ultimoOggettoScansionato.valore}\nDESCRIZIONE: ${ultimoOggettoScansionato.descrizione}`;
-            navigator.clipboard.writeText(testoAnnuncio);
-            alert("✅ Scheda Annuncio copiata negli appunti!");
-        }
-    </script>
 </body>
-</html>
-
+</html>F
